@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import {TodoProvider} from './contexts/TodoContext'
+import TodoForm from './components/TodoForm'
+import TodoItem from './components/TodoItem'
 export default function App() {
   
   const [todos, setTodos] = useState([])
@@ -15,7 +17,7 @@ export default function App() {
     setTodos((old)=>old.filter((todo)=> todo.id !==id))
   }
   const toggleComplete = (id) => {
-    setTodos ((old)=> old.map((oldTodo) => oldTodo===id?{...oldTodo, completed: !oldTodo.completed}:oldTodo))
+    setTodos ((old)=> old.map((oldTodo) => oldTodo.id===id?{...oldTodo, completed: !oldTodo.completed}:oldTodo))
   }
 useEffect(() => {
   const todos=JSON.parse(localStorage.getItem("todos"))
@@ -55,5 +57,3 @@ useEffect(() => {
     </>
   )
 }
-
-
